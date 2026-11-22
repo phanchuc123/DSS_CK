@@ -1,0 +1,125 @@
+﻿query_id,method,group,rank,dish_id,dish,score
+1,cbf,ready,1,dish2686,Nước ép cà chua không cần máy,1.0
+1,cbf,needs_shopping,1,dish2248,Trứng chiên hoa hồng,0.5714
+1,cbf,needs_shopping,2,dish1527,Bánh bông lan truyền thống,0.5714
+1,cbf,needs_shopping,3,dish2726,Nước ép cà chua,0.5714
+1,cbf,needs_shopping,4,dish2757,Nước ép cà chua chín,0.5556
+1,cbf,needs_shopping,5,dish0716,chiên trứng bằng nồi chiên không dầu,0.3636
+1,cbf,needs_shopping,6,dish0771,Trứng chiên ngon,0.2727
+1,cbf,needs_shopping,7,dish0710,Trứng cuộn rong biển,0.5714
+1,cbf,needs_shopping,8,dish0897,Trứng luộc dễ bóc,0.5714
+1,cbf,needs_shopping,9,dish1735,Mứt cà chua,0.5556
+1,cbf,needs_shopping,10,dish0763,Trứng cuộn Hàn Quốc đơn giản,0.4444
+1,encoder,ready,1,dish2686,Nước ép cà chua không cần máy,0.805
+1,encoder,needs_shopping,1,dish2248,Trứng chiên hoa hồng,0.8445
+1,encoder,needs_shopping,2,dish0716,chiên trứng bằng nồi chiên không dầu,0.8261
+1,encoder,needs_shopping,3,dish1527,Bánh bông lan truyền thống,0.7994
+1,encoder,needs_shopping,4,dish2726,Nước ép cà chua,0.7798
+1,encoder,needs_shopping,5,dish2757,Nước ép cà chua chín,0.735
+1,encoder,needs_shopping,6,dish0771,Trứng chiên ngon,0.6247
+1,encoder,needs_shopping,7,dish0763,Trứng cuộn Hàn Quốc đơn giản,0.9079
+1,encoder,needs_shopping,8,dish1735,Mứt cà chua,0.8375
+1,encoder,needs_shopping,9,dish0897,Trứng luộc dễ bóc,0.8362
+1,encoder,needs_shopping,10,dish0710,Trứng cuộn rong biển,0.8032
+1,hybrid,ready,1,dish2686,Nước ép cà chua không cần máy,0.7012
+1,hybrid,needs_shopping,1,dish2248,Trứng chiên hoa hồng,0.604
+1,hybrid,needs_shopping,2,dish1527,Bánh bông lan truyền thống,0.5927
+1,hybrid,needs_shopping,3,dish2726,Nước ép cà chua,0.5878
+1,hybrid,needs_shopping,4,dish2757,Nước ép cà chua chín,0.5726
+1,hybrid,needs_shopping,5,dish0716,chiên trứng bằng nồi chiên không dầu,0.5474
+1,hybrid,needs_shopping,6,dish0771,Trứng chiên ngon,0.3494
+1,hybrid,needs_shopping,7,dish0897,Trứng luộc dễ bóc,0.6019
+1,hybrid,needs_shopping,8,dish1735,Mứt cà chua,0.5983
+1,hybrid,needs_shopping,9,dish0710,Trứng cuộn rong biển,0.5936
+1,hybrid,needs_shopping,10,dish0763,Trứng cuộn Hàn Quốc đơn giản,0.5881
+1,main_aware,ready,1,dish2686,Nước ép cà chua không cần máy,0.8262
+1,main_aware,needs_shopping,1,dish2248,Trứng chiên hoa hồng,0.729
+1,main_aware,needs_shopping,2,dish1527,Bánh bông lan truyền thống,0.7177
+1,main_aware,needs_shopping,3,dish2726,Nước ép cà chua,0.7128
+1,main_aware,needs_shopping,4,dish2757,Nước ép cà chua chín,0.6976
+1,main_aware,needs_shopping,5,dish0716,chiên trứng bằng nồi chiên không dầu,0.6724
+1,main_aware,needs_shopping,6,dish0771,Trứng chiên ngon,0.5369
+1,main_aware,needs_shopping,7,dish0897,Trứng luộc dễ bóc,0.7269
+1,main_aware,needs_shopping,8,dish1735,Mứt cà chua,0.7233
+1,main_aware,needs_shopping,9,dish0710,Trứng cuộn rong biển,0.7186
+1,main_aware,needs_shopping,10,dish0763,Trứng cuộn Hàn Quốc đơn giản,0.7131
+2,cbf,needs_shopping,1,dish3165,Gừng ngâm giấm,0.4286
+2,cbf,needs_shopping,2,dish3198,Nước mắm gừng,0.2727
+2,cbf,needs_shopping,3,dish2481,Nước ép gừng chanh bạc hà,0.4286
+2,cbf,needs_shopping,4,dish0772,Cách làm gà tẩm bột chiên giòn aji quick,0.3333
+2,cbf,needs_shopping,5,dish1708,Kẹo cau,0.2857
+2,cbf,needs_shopping,6,dish3187,Nước chấm vịt luộc,0.2727
+2,cbf,needs_shopping,7,dish2319,Cách ngâm chanh gừng đường phèn,0.4286
+2,cbf,needs_shopping,8,dish2107,Mứt gừng dẻo,0.3333
+2,cbf,needs_shopping,9,dish1886,Bia gừng,0.3333
+2,cbf,needs_shopping,10,dish2694,Nước ép tỏi,0.2222
+2,encoder,needs_shopping,1,dish3165,Gừng ngâm giấm,0.7578
+2,encoder,needs_shopping,2,dish3198,Nước mắm gừng,0.5191
+2,encoder,needs_shopping,3,dish0772,Cách làm gà tẩm bột chiên giòn aji quick,0.8854
+2,encoder,needs_shopping,4,dish2481,Nước ép gừng chanh bạc hà,0.7363
+2,encoder,needs_shopping,5,dish3187,Nước chấm vịt luộc,0.659
+2,encoder,needs_shopping,6,dish1708,Kẹo cau,0.6516
+2,encoder,needs_shopping,7,dish2694,Nước ép tỏi,0.8809
+2,encoder,needs_shopping,8,dish1886,Bia gừng,0.7198
+2,encoder,needs_shopping,9,dish2107,Mứt gừng dẻo,0.7051
+2,encoder,needs_shopping,10,dish2319,Cách ngâm chanh gừng đường phèn,0.655
+2,hybrid,needs_shopping,1,dish3165,Gừng ngâm giấm,0.5466
+2,hybrid,needs_shopping,2,dish3198,Nước mắm gừng,0.4479
+2,hybrid,needs_shopping,3,dish0772,Cách làm gà tẩm bột chiên giòn aji quick,0.5547
+2,hybrid,needs_shopping,4,dish2481,Nước ép gừng chanh bạc hà,0.5412
+2,hybrid,needs_shopping,5,dish1708,Kẹo cau,0.4843
+2,hybrid,needs_shopping,6,dish3187,Nước chấm vịt luộc,0.4829
+2,hybrid,needs_shopping,7,dish2694,Nước ép tỏi,0.5258
+2,hybrid,needs_shopping,8,dish2319,Cách ngâm chanh gừng đường phèn,0.5209
+2,hybrid,needs_shopping,9,dish1886,Bia gừng,0.5133
+2,hybrid,needs_shopping,10,dish2107,Mứt gừng dẻo,0.5096
+2,main_aware,needs_shopping,1,dish3165,Gừng ngâm giấm,0.6716
+2,main_aware,needs_shopping,2,dish3198,Nước mắm gừng,0.5729
+2,main_aware,needs_shopping,3,dish0772,Cách làm gà tẩm bột chiên giòn aji quick,0.6797
+2,main_aware,needs_shopping,4,dish2481,Nước ép gừng chanh bạc hà,0.6662
+2,main_aware,needs_shopping,5,dish3187,Nước chấm vịt luộc,0.6079
+2,main_aware,needs_shopping,6,dish1708,Kẹo cau,0.3593
+2,main_aware,needs_shopping,7,dish2319,Cách ngâm chanh gừng đường phèn,0.6459
+2,main_aware,needs_shopping,8,dish1886,Bia gừng,0.6383
+2,main_aware,needs_shopping,9,dish2107,Mứt gừng dẻo,0.6346
+2,main_aware,needs_shopping,10,dish2694,Nước ép tỏi,0.4008
+3,cbf,needs_shopping,1,dish2248,Trứng chiên hoa hồng,0.4286
+3,cbf,needs_shopping,2,dish1527,Bánh bông lan truyền thống,0.4286
+3,cbf,needs_shopping,3,dish0716,chiên trứng bằng nồi chiên không dầu,0.2727
+3,cbf,needs_shopping,4,dish0771,Trứng chiên ngon,0.2727
+3,cbf,needs_shopping,5,dish0439,Thịt kho nước mắm,0.2
+3,cbf,needs_shopping,6,dish0897,Trứng luộc dễ bóc,0.4286
+3,cbf,needs_shopping,7,dish0710,Trứng cuộn rong biển,0.4286
+3,cbf,needs_shopping,8,dish0763,Trứng cuộn Hàn Quốc đơn giản,0.3333
+3,cbf,needs_shopping,9,dish0735,Thịt heo chiên tỏi ớt,0.1429
+3,cbf,needs_shopping,10,dish0901,Trứng hấp mềm mịn,0.4286
+3,encoder,needs_shopping,1,dish2248,Trứng chiên hoa hồng,0.9715
+3,encoder,needs_shopping,2,dish0439,Thịt kho nước mắm,0.8847
+3,encoder,needs_shopping,3,dish0716,chiên trứng bằng nồi chiên không dầu,0.863
+3,encoder,needs_shopping,4,dish0771,Trứng chiên ngon,0.8446
+3,encoder,needs_shopping,5,dish1527,Bánh bông lan truyền thống,0.8277
+3,encoder,needs_shopping,6,dish0735,Thịt heo chiên tỏi ớt,0.9232
+3,encoder,needs_shopping,7,dish0763,Trứng cuộn Hàn Quốc đơn giản,0.9127
+3,encoder,needs_shopping,8,dish0897,Trứng luộc dễ bóc,0.8918
+3,encoder,needs_shopping,9,dish0710,Trứng cuộn rong biển,0.8334
+3,encoder,needs_shopping,10,dish2975,Bánh flan sữa tươi,0.9256
+3,hybrid,needs_shopping,1,dish2248,Trứng chiên hoa hồng,0.6
+3,hybrid,needs_shopping,2,dish1527,Bánh bông lan truyền thống,0.5641
+3,hybrid,needs_shopping,3,dish0716,chiên trứng bằng nồi chiên không dầu,0.5339
+3,hybrid,needs_shopping,4,dish0771,Trứng chiên ngon,0.5293
+3,hybrid,needs_shopping,5,dish0439,Thịt kho nước mắm,0.5212
+3,hybrid,needs_shopping,6,dish0897,Trứng luộc dễ bóc,0.5801
+3,hybrid,needs_shopping,7,dish0710,Trứng cuộn rong biển,0.5655
+3,hybrid,needs_shopping,8,dish0763,Trứng cuộn Hàn Quốc đơn giản,0.5615
+3,hybrid,needs_shopping,9,dish0735,Thịt heo chiên tỏi ớt,0.5165
+3,hybrid,needs_shopping,10,dish0901,Trứng hấp mềm mịn,0.5623
+3,main_aware,needs_shopping,1,dish2248,Trứng chiên hoa hồng,0.725
+3,main_aware,needs_shopping,2,dish1527,Bánh bông lan truyền thống,0.6891
+3,main_aware,needs_shopping,3,dish0716,chiên trứng bằng nồi chiên không dầu,0.6589
+3,main_aware,needs_shopping,4,dish0771,Trứng chiên ngon,0.6543
+3,main_aware,needs_shopping,5,dish0439,Thịt kho nước mắm,0.5212
+3,main_aware,needs_shopping,6,dish0897,Trứng luộc dễ bóc,0.7051
+3,main_aware,needs_shopping,7,dish0710,Trứng cuộn rong biển,0.6905
+3,main_aware,needs_shopping,8,dish0763,Trứng cuộn Hàn Quốc đơn giản,0.6865
+3,main_aware,needs_shopping,9,dish0735,Thịt heo chiên tỏi ớt,0.4748
+3,main_aware,needs_shopping,10,dish0901,Trứng hấp mềm mịn,0.6873
