@@ -1,0 +1,89 @@
+{
+  "selected_weights": [
+    0.25,
+    0.25,
+    0.5,
+    0.0
+  ],
+  "validation_hit10": 0.8583,
+  "test": {
+    "Random": {
+      "Hit@1": 0.0241,
+      "Hit@5": 0.0636,
+      "Hit@10": 0.0935,
+      "MRR": 0.0423,
+      "MRR@10": 0.0423
+    },
+    "CBF": {
+      "Hit@1": 0.3079,
+      "Hit@5": 0.5985,
+      "Hit@10": 0.6878,
+      "MRR": 0.4293,
+      "MRR@10": 0.4293
+    },
+    "TF-IDF Cosine": {
+      "Hit@1": 0.6465,
+      "Hit@5": 0.7837,
+      "Hit@10": 0.8311,
+      "MRR": 0.7058,
+      "MRR@10": 0.7058
+    },
+    "Jaccard Similarity": {
+      "Hit@1": 0.6666,
+      "Hit@5": 0.7874,
+      "Hit@10": 0.8303,
+      "MRR": 0.7191,
+      "MRR@10": 0.7191
+    },
+    "Encoder": {
+      "Hit@1": 0.5604,
+      "Hit@5": 0.706,
+      "Hit@10": 0.7601,
+      "MRR": 0.6234,
+      "MRR@10": 0.6234
+    },
+    "Previous hybrid 50/50": {
+      "Hit@1": 0.5292,
+      "Hit@5": 0.7326,
+      "Hit@10": 0.7905,
+      "MRR": 0.6158,
+      "MRR@10": 0.6158
+    },
+    "Main-aware Equal Blend": {
+      "Hit@1": 0.5338,
+      "Hit@5": 0.7061,
+      "Hit@10": 0.7785,
+      "MRR": 0.6081,
+      "MRR@10": 0.6081
+    },
+    "Deep hybrid (validation selected)": {
+      "Hit@1": 0.7144,
+      "Hit@5": 0.8202,
+      "Hit@10": 0.8532,
+      "MRR": 0.7601,
+      "MRR@10": 0.7601
+    }
+  },
+  "split_sizes": {
+    "train": 26024,
+    "val": 6506,
+    "test": 6506
+  },
+  "run": {
+    "id": "20261124T051602646247Z",
+    "seed": 42,
+    "device": "cuda",
+    "data_file": "dish_knowledge_base_with_images.json",
+    "data_sha256": "38a6ab92a5674f0b42468f720807b437def9e3fba49ab137620392631ba29be6",
+    "synonyms_file": "ingredients_synonyms_qwen.json",
+    "synonyms_sha256": "9924604884d27cd984f5ef0d17f7bf6562eda151a48361fe48e28f0819dc03b9",
+    "splits_sha256": "0cf7aa7348a5fe96ac98cab47a1ae25a701d1743b8fb2a9ff67cfef74729a401",
+    "encoder_epochs_limit": 40,
+    "batch_size": 128,
+    "python": "3.13.16",
+    "torch": "2.11.0+cu130",
+    "numpy": "2.1.3",
+    "pandas": "2.3.3",
+    "mrr_definition": "MRR@10; xếp ngoài 10 vị trí đầu được tính 0"
+  }
+}

@@ -9,9 +9,11 @@ app = Flask(__name__)
 
 # Paths
 BASE_DIR = Path(__file__).parent
-MODEL_PATH = BASE_DIR / 'recipe_model' / 'ingredient_set_encoder.pt'
-KG_PATH = BASE_DIR / 'recipe_model' / 'knowledge_graph.json'
-RAW_DATA_PATH = BASE_DIR / 'dish_knowledge_base_with_images.json'
+MODEL_PATH = BASE_DIR / 'recipe_model1' / 'ingredient_set_encoder.pt'
+KG_PATH = BASE_DIR / 'recipe_model1' / 'knowledge_graph.json'
+RAW_DATA_PATH = BASE_DIR / 'data' / 'dish_knowledge_base_with_images.json'
+if not RAW_DATA_PATH.exists():
+    RAW_DATA_PATH = BASE_DIR / 'dish_knowledge_base_with_images.json'
 
 # Load detailed recipe instructions and steps
 dish_details = {}
