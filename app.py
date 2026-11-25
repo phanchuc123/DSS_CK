@@ -109,6 +109,25 @@ def resolve_ingredient(name):
     norm = normalize(name)
     return synonym_to_canonical.get(norm, norm)
 
+# Đây là phân loại gần đúng từ danh sách tủ gia vị hiện có, không phải
+# nhãn vai trò nguyên liệu trong công thức. Không phụ thuộc tùy chọn tủ bếp.
+PANTRY_CANONICAL = {resolve_ingredient(item) for item in default_pantry}
+# Heuristic cố định: rau gia vị có thể là nguyên liệu chính của món nên không
+# tự coi là có sẵn. Khi có thực phẩm khác, chỉ dùng chúng để tính điểm.
+AROMATIC_CANONICAL = {resolve_ingredient(item) for item in ('gung', 'hanh la', 'sa')}
+
+# Importance lớn nhất trong nhóm thực phẩm là ước lượng, không phải vai trò
+# nguyên liệu chính đã được xác minh. Món chỉ có gia vị không có main.
+food_mask = np.ones(len(vocab) + 1, dtype=bool)
+food_mask[0] = False
+for key in PANTRY_CANONICAL:
+    if key in vocab:
+        food_mask[vocab[key]] = False
+food_weights = np.where(food_mask[None, :], weights, 0)
+food_max = food_weights.max(axis=1, keepdims=True)
+main_matrix = ((food_weights > 0) & (food_weights == food_max)).astype(np.float32)
+main_count = main_matrix.sum(axis=1)
+
 def features_batch(x):
     present = np.zeros((len(x), len(vocab)+1), dtype=np.float32)
     for i, row in enumerate(x.numpy()):
@@ -116,10 +135,8 @@ def features_batch(x):
     matched = present @ (weights > 0).astype(np.float32).T
     coverage = matched / np.maximum(present.sum(axis=1, keepdims=True), 1)
     cbf = (present @ weights.T) / row_sums[None, :]
-    main = ((weights > 0) & (weights == weights.max(axis=1, keepdims=True))).astype(np.float32)
-    main_count = main.sum(axis=1)
-    main_score = np.divide(present @ main.T, main_count[None, :],
-                           out=np.ones((len(x), len(recipes)), dtype=np.float32),
+    main_score = np.divide(present @ main_matrix.T, main_count[None, :],
+                           out=np.zeros((len(x), len(recipes)), dtype=np.float32),
                            where=main_count[None, :] > 0)
     with torch.no_grad():
         logits = model(x).numpy()
@@ -165,9 +182,18 @@ def perform_recommend(ingredients, top_k=10, method='hybrid', category=None, ass
     unknown = [raw_items[i] for i, k in enumerate(resolved) if k not in vocab]
     ids = sorted({vocab[k] for k in resolved if k in vocab})
     
-    optional = set(default_pantry) if assume_pantry else set()
-    result = {'ready': [], 'needs_shopping': [], 'unknown': unknown, 'query_resolved': [names.get(keys[i], keys[i]) for i in ids]}
+    optional = PANTRY_CANONICAL if assume_pantry else set()
+    available_food_ids = {i for i in ids if keys[i] not in PANTRY_CANONICAL}
+    non_aromatic_food_ids = {i for i in available_food_ids if keys[i] not in AROMATIC_CANONICAL}
+    food_ids = non_aromatic_food_ids or available_food_ids
+    result = {'ready': [], 'needs_shopping': [], 'unknown': unknown,
+              'query_resolved': [names.get(keys[i], keys[i]) for i in ids],
+              'notice': None}
     if not ids:
+        result['notice'] = 'Chưa nhận diện được nguyên liệu. Hãy kiểm tra tên và nhập thêm nguyên liệu thực phẩm.'
+        return result
+    if not food_ids:
+        result['notice'] = 'Bạn mới nhập gia vị hoặc nguyên liệu tủ bếp. Hãy thêm nguyên liệu thực phẩm như thịt, trứng hoặc rau.'
         return result
         
     x = torch.tensor([ids])
@@ -182,7 +208,7 @@ def perform_recommend(ingredients, top_k=10, method='hybrid', category=None, ass
     coeff = configs.get(method, best_coeff)
     scores = sum(w * f[0] for w, f in zip(coeff, (deep, cbf, coverage, main)))
     
-    candidates_set = graph_candidates(ids, category=category if category != 'all' else None)
+    candidates_set = graph_candidates(food_ids, category=category if category != 'all' else None)
     
     for idx in np.argsort(-scores):
         if idx not in candidates_set:
@@ -193,7 +219,8 @@ def perform_recommend(ingredients, top_k=10, method='hybrid', category=None, ass
         missing_required = [k for k in missing_keys if k not in optional]
         explanation = graph_explanation(idx, ids)
         group = 'ready' if not missing_required else 'needs_shopping'
-        max_imp = max(dish['ingredients'].values()) if dish['ingredients'] else 1.0
+        missing_main = [k for k in missing_required
+                        if vocab.get(k) is not None and main_matrix[idx, vocab[k]] > 0]
         
         result[group].append({
             'dish_id': dish['id'],
@@ -203,19 +230,27 @@ def perform_recommend(ingredients, top_k=10, method='hybrid', category=None, ass
             'matched': [names.get(k, k) for k in dish['ingredients'] if vocab.get(k) in have],
             'missing_required': [names.get(k, k) for k in missing_required],
             'missing_optional': [names.get(k, k) for k in missing_keys if k in optional],
-            'missing_main_provisional': [names.get(k, k) for k in missing_required if dish['ingredients'][k] == max_imp],
+            'missing_main_provisional': [names.get(k, k) for k in missing_main],
             'input_utilization': round(float(coverage[0, idx]) * 100, 1),
+            'matched_food_count': sum(vocab.get(k) in food_ids for k in dish['ingredients']),
+            'food_utilization': round(100 * sum(vocab.get(k) in food_ids for k in dish['ingredients']) / len(food_ids), 1),
             'category': explanation.get('category', 'Khác'),
             'kg_explanation': explanation,
             'url': dish.get('url'),
             'image_url': dish.get('image_url') or 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80'
         })
         
-    result['needs_shopping'].sort(key=lambda item: (
-        len(item['missing_main_provisional']),
-        len(item['missing_required']),
-        -item['score']
-    ))
+    def rank_key(item):
+        return (
+            -item['matched_food_count'],
+            len(item['missing_main_provisional']),
+            len(item['missing_required']),
+            -item['score'],
+        )
+    result['ready'].sort(key=rank_key)
+    result['needs_shopping'].sort(key=rank_key)
+    if not candidates_set:
+        result['notice'] = 'Không tìm thấy món khớp nguyên liệu thực phẩm và loại món đã chọn. Hãy thử thêm nguyên liệu hoặc đổi loại món.'
     result['ready'] = result['ready'][:top_k]
     result['needs_shopping'] = result['needs_shopping'][:top_k]
     return result

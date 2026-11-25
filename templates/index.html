@@ -33,7 +33,7 @@
             </div>
             <div class="hidden md:flex items-center space-x-2 bg-emerald-700/50 px-3 py-1.5 rounded-full text-xs font-semibold">
                 <span class="inline-block w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
-                <span>DeepSets (0.25) + CBF (0.25) + Utilization (0.50)</span>
+                <span>Deep Hybrid · Ưu tiên nguyên liệu sẵn có</span>
             </div>
         </div>
     </header>
@@ -78,9 +78,9 @@
                 <div>
                     <label class="block text-xs font-bold text-slate-600 mb-1.5 uppercase tracking-wider">Mô hình gợi ý</label>
                     <select id="method-select" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-emerald-500 outline-none font-medium">
-                        <option value="hybrid" selected>🌟 Deep Hybrid (Khuyên dùng - 85.8% Hit@10)</option>
-                        <option value="cbf">📊 CBF (Content-Based thuần)</option>
-                        <option value="encoder">🧠 Set Encoder (DeepSets thuần)</option>
+                        <option value="hybrid" selected>🌟 Deep Hybrid</option>
+                        <option value="cbf">📊 CBF (Content-Based)</option>
+                        <option value="encoder">🧠 Set Encoder (DeepSets)</option>
                         <option value="main_aware">⚖️ Main-aware Equal Blend</option>
                     </select>
                 </div>
@@ -135,9 +135,11 @@
             </div>
             <button onclick="document.getElementById('unknown-banner').classList.add('hidden')" class="text-amber-600 hover:text-amber-800"><i class="fa-solid fa-xmark"></i></button>
         </div>
+        <div id="recommend-notice" role="status" class="hidden bg-amber-50 border-l-4 border-amber-500 p-4 rounded-xl text-amber-800 text-sm"></div>
 
         <!-- Results Area -->
         <div id="results-area" class="space-y-4 hidden">
+            <p class="text-xs text-slate-500">Trong mỗi nhóm, món dùng nhiều thực phẩm đã nhập được ưu tiên; tiếp theo là số nguyên liệu chính ước lượng và nguyên liệu cần mua còn thiếu, rồi mới đến điểm mô hình.</p>
             <!-- Tabs Header -->
             <div class="flex border-b border-slate-200 bg-white rounded-t-2xl px-4 pt-2">
                 <button id="tab-ready-btn" onclick="switchTab('ready')"
@@ -327,15 +329,12 @@
                         <!-- Progress & Scores -->
                         <div class="space-y-1.5 mb-3 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
                             <div class="flex justify-between text-xs font-medium">
-                                <span class="text-slate-500">Độ phù hợp mô hình:</span>
-                                <span class="font-bold text-emerald-700">${(dish.score * 100).toFixed(1)}%</span>
-                            </div>
-                            <div class="w-full bg-slate-200 rounded-full h-1.5">
-                                <div class="bg-emerald-500 h-1.5 rounded-full" style="width: ${Math.min(100, Math.max(5, dish.score * 100))}%"></div>
+                                <span class="text-slate-500">Điểm mô hình (không phải xác suất):</span>
+                                <span class="font-bold text-emerald-700">${Number(dish.score).toFixed(4)}</span>
                             </div>
                             <div class="flex justify-between text-[11px] text-slate-500 pt-0.5">
-                                <span>Tận dụng nguyên liệu có:</span>
-                                <span class="font-semibold text-slate-700">${dish.input_utilization}%</span>
+                                <span title="Gừng, hành lá, sả không tính vào tỷ lệ nếu có thực phẩm khác; nếu chỉ nhập các nguyên liệu này thì vẫn tính.">Nguyên liệu ưu tiên được dùng <i class="fa-regular fa-circle-question" aria-label="Gừng, hành lá, sả không tính vào tỷ lệ nếu có thực phẩm khác; nếu chỉ nhập các nguyên liệu này thì vẫn tính."></i>:</span>
+                                <span class="font-semibold text-slate-700">${dish.food_utilization}%</span>
                             </div>
                         </div>
 
@@ -389,6 +388,10 @@
                 });
 
                 const data = await response.json();
+
+                const notice = document.getElementById('recommend-notice');
+                notice.textContent = data.notice || '';
+                notice.classList.toggle('hidden', !data.notice);
 
                 // Handle unknown items
                 const unknownBanner = document.getElementById('unknown-banner');
